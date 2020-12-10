@@ -14,7 +14,20 @@ def get_curr_codes():
  
           
 def handle_error_msg(converting_from, converting_to, amount):
-    """Handle error messages for invalid currency codes and invalid amounts"""
+    """Handle error messages for invalid currency codes and invalid amounts
+    
+    >>> handle_error_msg('SPRINGBOARD', 'USD', 999)
+    'Please enter a valid "Converting from:" currency code.'
+
+    >>> handle_error_msg('USD', 'SPRINGBOARD', 888)
+    'Please enter a valid "Converting to:" currency code.'
+
+    >>> handle_error_msg('USD', 'ILS', -777)
+    'Please enter a positive currency "Amount:" to be converted.'
+    
+    >>> handle_error_msg('USD', 'GBP', 987.65)
+
+    """
 
     curr_codes = get_curr_codes()
 
@@ -32,7 +45,11 @@ def handle_error_msg(converting_from, converting_to, amount):
 
 
 def handle_conversion(converting_from, converting_to, amount):
-    """Make currency conversion and return as a decimal with two places"""
+    """Make currency conversion and return as a decimal with two places
+    
+    >>> handle_conversion('USD', 'USD', '100')
+    Decimal('100.00')
+    """
     
     c = CurrencyRates()   
     conversion = c.convert(converting_from, converting_to, amount)
@@ -41,7 +58,11 @@ def handle_conversion(converting_from, converting_to, amount):
 
 
 def get_curr_symbol(converting_to):
-    """Get currency symbol"""
+    """Get currency symbol
+    
+    >>> get_curr_symbol('USD')
+    'US$'
+    """
 
     c = CurrencyCodes()
     return c.get_symbol(converting_to)    
